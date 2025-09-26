@@ -51,5 +51,20 @@ vim.keymap.set('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', {
   desc = 'Toggle file explorer'
 })
 
-require("config.lazy")
+-- 回上次游標位置
+vim.api.nvim_create_autocmd("BufReadPost", {
+    desc = "Jump to last edit position when opening a file",
+    pattern = { "*" }, -- 適用於所有檔案
+    callback = function()
+        -- 檢查 '\"' (上次離開時的游標位置) 標記是否存在且有效
+        -- `line("'\"")` 取得標記所在行號
+        -- `line("$")` 取得檔案總行數
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            -- 執行 `g` (反引號) `"` (雙引號) 進行跳轉。
+            -- `g`` 作用是跳到上次離開該緩衝區的位置。
+            vim.cmd('normal! g`"')
+        end
+    end,
+})
 
+require("config.lazy")
