@@ -1,23 +1,89 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 format = """
-[░▒▓](#a3aed2)\
-[  ](bg:#a3aed2 fg:#090c0c)\
-[](bg:#769ff0 fg:#a3aed2)\
+[](#565f89)\
+$os\
+$username\
+[](bg:color_bg3 fg:#565f89)\
 $directory\
-[](fg:#769ff0 bg:#394260)\
+[](fg:color_bg3 bg:color_aqua)\
 $git_branch\
 $git_status\
-[](fg:#394260 bg:#212736)\
-$nodejs\
+[](fg:color_aqua bg:color_blue)\
+$c\
+$cpp\
 $rust\
 $golang\
+$nodejs\
 $php\
-[](fg:#212736 bg:#1d2230)\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:color_blue bg:color_bg3)\
+$docker_context\
+$conda\
+$pixi\
+[](fg:color_bg3 bg:color_bg1)\
 $time\
-[ ](fg:#1d2230)\
-\n$character"""
+[ ](fg:color_bg1)\
+$line_break$character"""
+
+palette = 'tokyonight'
+
+[palettes.tokyonight]
+# 統一冷色調定義
+color_fg = '#c0caf5'      # 主要文字色 (冷白)
+color_bg = '#1f2335'      # 主背景色 (深藍)
+color_bg1 = '#1f2335'     # 時間區塊背景 (最深色)
+color_bg3 = '#292e42'     # 區塊分隔背景 (中深色)
+color_blue = '#7aa2f7'    # 語言模組背景 (藍色)
+color_aqua = '#7dcfff'    # Git 模組背景 (青色)
+color_green = '#9ece6a'   # 成功符號 (綠色，仍是冷色系常用色)
+color_red = '#f7768e'     # 錯誤符號 (紅色，無法避免)
+color_purple = '#bb9af7'  # Vim 模式 (紫色)
+# **移除 color_orange 和 color_yellow 鮮豔區塊**
+
+# --- 模組設定：全部統一為冷色調 ---
+
+[os]
+disabled = false
+# 初始區塊使用柔和的前景色作為背景
+style = "bg:#565f89 fg:color_fg" # 使用深灰色 #565f89 作為柔和的起始色
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
+
+[username]
+show_always = true
+# 初始區塊使用柔和的前景色作為背景
+style_user = "bg:#565f89 fg:color_fg"
+style_root = "bg:#565f89 fg:color_fg"
+format = '[ $user ]($style)'
 
 [directory]
-style = "fg:#e3e5e5 bg:#769ff0"
+# 目錄背景使用中深色 color_bg3
+style = "fg:color_fg bg:color_bg3"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -25,40 +91,100 @@ truncation_symbol = "…/"
 [directory.substitutions]
 "Documents" = "󰈙 "
 "Downloads" = " "
-"Music" = " "
+"Music" = "󰝚 "
 "Pictures" = " "
+"Developer" = "󰲋 "
 
 [git_branch]
 symbol = ""
-style = "bg:#394260"
-format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
+# Git 模組背景使用 color_aqua (青色)
+style = "bg:color_aqua"
+format = '[[ $symbol $branch ](fg:color_fg bg:color_aqua)]($style)'
 
 [git_status]
-style = "bg:#394260"
-format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
+style = "bg:color_aqua"
+format = '[[($all_status$ahead_behind )](fg:color_fg bg:color_aqua)]($style)'
 
+# --- 程式語言模組 (統一使用 color_blue) ---
 [nodejs]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+[c]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
 
 [php]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+[java]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+[haskell]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+[python]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg bg:color_blue)]($style)'
+
+# --- 環境/上下文模組 (統一使用 color_bg3) ---
+[docker_context]
+symbol = ""
+style = "bg:color_bg3"
+format = '[[ $symbol( $context) ](fg:color_fg bg:color_bg3)]($style)'
+
+[conda]
+style = "bg:color_bg3"
+format = '[[ $symbol( $environment) ](fg:color_fg bg:color_bg3)]($style)'
+
+[pixi]
+style = "bg:color_bg3"
+format = '[[ $symbol( $version)( $environment) ](fg:color_fg bg:color_bg3)]($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+time_format = "%R"
+style = "bg:color_bg1"
+format = '[[  $time ](fg:color_fg bg:color_bg1)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[](bold fg:color_green)'
+error_symbol = '[](bold fg:color_red)'
+vimcmd_symbol = '[](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
+vimcmd_replace_symbol = '[](bold fg:color_purple)'
+# 使用 color_aqua 作為視覺模式的顏色
+vimcmd_visual_symbol = '[](bold fg:color_aqua)'
