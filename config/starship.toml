@@ -78,7 +78,8 @@ Pop = ""
 show_always = true
 # 初始區塊使用柔和的前景色作為背景
 style_user = "bg:#565f89 fg:color_fg"
-style_root = "bg:#565f89 fg:color_fg"
+# style_root = "bg:#565f89 fg:color_fg"
+style_root = "bg:#565f89 fg:#ff0000"
 format = '[ $user ]($style)'
 
 [directory]
