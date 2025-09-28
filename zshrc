@@ -119,6 +119,8 @@ fi
 # aliases
 alias tmux="tmux -2"
 alias ta="tmux attach"
+alias vi="nvim"
+alias vim="nvim"
 
 # starship
 eval "$(starship init zsh)"
