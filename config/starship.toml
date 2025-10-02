@@ -3,6 +3,7 @@
 format = """
 [](#565f89)\
 $os\
+$hostname\
 $username\
 [](bg:color_bg3 fg:#565f89)\
 $directory\
@@ -80,14 +81,24 @@ show_always = true
 style_user = "bg:#565f89 fg:color_fg"
 # style_root = "bg:#565f89 fg:color_fg"
 style_root = "bg:#565f89 fg:#ff0000"
-format = '[ $user ]($style)'
+format = '[$user]($style)'
+
+[hostname]
+# 保持與 os/username 相同的樣式
+style = "bg:#565f89 fg:color_fg"
+# 顯示格式為 [ @hostname ]
+format = '[ $hostname/]($style)'
+# 只在 SSH 連線時顯示，或設定為 `show_always = true` 讓它總是顯示
+ssh_only = false
 
 [directory]
 # 目錄背景使用中深色 color_bg3
 style = "fg:color_fg bg:color_bg3"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+#format = "[ $path ]($style)"
+format = "[ $read_only$path ]($style)"
+truncate_to_repo = false
+#truncation_length = 3
+#truncation_symbol = "…/"
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -100,11 +111,13 @@ truncation_symbol = "…/"
 symbol = ""
 # Git 模組背景使用 color_aqua (青色)
 style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg bg:color_aqua)]($style)'
+# **調整：前景色從 color_fg 改為 color_bg3，讓文字變暗凸顯**
+format = '[[ $symbol $branch ](fg:color_bg3 bg:color_aqua)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg bg:color_aqua)]($style)'
+# **調整：前景色從 color_fg 改為 color_bg3，讓文字變暗凸顯**
+format = '[[($all_status$ahead_behind )](fg:color_bg3 bg:color_aqua)]($style)'
 
 # --- 程式語言模組 (統一使用 color_blue) ---
 [nodejs]
